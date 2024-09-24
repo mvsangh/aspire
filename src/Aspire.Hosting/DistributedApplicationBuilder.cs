@@ -250,6 +250,7 @@ public class DistributedApplicationBuilder : IDistributedApplicationBuilder
 
             if (options.EnableResourceLogging)
             {
+                // This must be added before DcpHostService to ensure that it can subscribe to the ResourceNotificationService and ResourceLoggerService
                 _innerBuilder.Services.AddHostedService<ResourceLoggerForwarderService>();
             }
 
