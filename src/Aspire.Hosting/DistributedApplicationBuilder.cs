@@ -248,6 +248,11 @@ public class DistributedApplicationBuilder : IDistributedApplicationBuilder
                 _innerBuilder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IValidateOptions<DashboardOptions>, ValidateDashboardOptions>());
             }
 
+            if (options.EnableResourceLogging)
+            {
+                _innerBuilder.Services.AddHostedService<ResourceLoggerForwarderService>();
+            }
+
             // DCP stuff
             _innerBuilder.Services.AddSingleton<ApplicationExecutor>();
             _innerBuilder.Services.AddSingleton<IDcpDependencyCheckService, DcpDependencyCheck>();
